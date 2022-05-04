@@ -21,17 +21,17 @@ cat.feed();
 function Cat() {
     var foodAmount = 50;
 
-    function getFormatFoodAmount() {
+    function formatFoodAmount() {
         return foodAmount + 'гр.'
     }
 
     this.feed = function() {
-       return console.log('Насыпаем в миску ' + getFormatFoodAmount() + ' корма.')
+       return console.log('Насыпаем в миску ' + this.dailyNorm() + ' корма.')
     }
 
     this.dailyNorm = function(amount) {
         if (!arguments.length) {
-        return foodAmount
+        return formatFoodAmount();
         }
 
         if (amount < 50) {
@@ -42,11 +42,11 @@ function Cat() {
             throw new Error('Значение должно быть меньше 100');
         }
 
-       return foodAmount = amount;
+        foodAmount = amount;
     }
 }
 
 var cat = new Cat();
 
 cat.dailyNorm(70);
-cat.feed();
+cat.feed()
