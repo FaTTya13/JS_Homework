@@ -33,7 +33,7 @@ function Cat(name) {
     var animalFeed = this.feed;
 
     this.feed = function() {
-        animalFeed.call();
+        animalFeed();
         console.log('Кот доволен ^_^');
         return this;
     }
@@ -46,17 +46,17 @@ function Cat(name) {
 
 var cat = new Cat('Barsik');
 
+
 cat.dailyNorm(60).feed().stroke();
 
 //   Задание 2:
 function Animal(name) {
-    var foodAmount = 50;
-    var self = this;
+    this._foodAmount = 50;
     this.name = name;
 };
 
-Animal.prototype.formatFoodAmount = function() {
-    return foodAmount + 'гр.';
+Animal.prototype._formatFoodAmount = function() {
+    return this._foodAmount + 'гр.';
 };
 
 Animal.prototype.feed = function() {
@@ -66,24 +66,24 @@ Animal.prototype.feed = function() {
 
 Animal.prototype.dailyNorm = function(amount) {
     if (!arguments.length) {
-    return Animal.prototype.formatFoodAmount();
+    return this._formatFoodAmount();
     }
     if (amount < 50 || amount > 100) {
         throw new Error('Значение должно быть больше 50, однако меньше 100');
     }
-    foodAmount = amount;;
+    this._foodAmount = amount;
     return this;
 };
 
 function Cat(name) {
-    this.name = name;
+    Animal.apply(this, arguments);
 };
 
 Cat.prototype = Object.create(Animal.prototype);
 Cat.prototype.constructor = Cat;
 
 Cat.prototype.feed = function() {
-    Animal.prototype.feed();
+    Animal.prototype.feed.apply(this);
     console.log('Кот доволен ^_^');
     return this;
 }
