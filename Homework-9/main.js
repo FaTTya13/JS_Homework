@@ -2,14 +2,13 @@
 // Переписать задачу с использованием перебирающего метода массивов:
 
 function filterNumbersArr(numbers) {
-    var newArr = [];
-
-    numbers.map(function(el){
-        if (el > 0) {
-            newArr[newArr.length] = el;
-        };
-    });
-    return newArr;
+  var newArr = [];
+  numbers.filter(function(el) {
+      if (el > 0) {
+        newArr[newArr.length] = el;
+      };
+  });
+  return newArr;
 }
 
 filterNumbersArr([-1, 0, 2, 34, -2, 5, -3, 0, 16]);
@@ -18,20 +17,29 @@ filterNumbersArr([-1, 0, 2, 34, -2, 5, -3, 0, 16]);
 // Написать функцию, принимающую массив чисел и возвращающую первое найденное положительное число.
 
 function findPositive(arr) {
-    var positive = arr.filter(function(el){
-        if (el > 0) return el;
-   })[0];
-   return positive;
+  var positive = arr.filter(function(el) {
+    return el > 0;
+  })[0];
+  return positive;
 };
 
 function findPositive(arr) {
-    var positive = arr.find(function(el){
-        if (el > 0) return el;
+  var positive = arr.find(function(el) {
+    return el > 0;
    });
    return positive;
 };
 
-findPositive([-3, -2, 0, 10, -2, 1]);
+// Либо такой вариант ?
+var arr = [-3, -2, 1, 10, -2, 1];
+
+var findPositive = arr.find(function(el) {
+    return el > 0;
+   });
+
+findPositive;
+
+findPositive([-3, -2, 1, 10, -2, 1]);
 
 // Задание 3:
 // Написать функцию, которая будет определять, является ли переданное в нее слово палиндромом (напр. шалаш).
@@ -39,9 +47,9 @@ findPositive([-3, -2, 0, 10, -2, 1]);
 
 function isPalindrome(word) {
     var word = word.toLowerCase(),
-        reverseWord = word.split('').reverse().join('');
+      reverseWord = word.split('').reverse().join('');
 
-        return (word === reverseWord)? true : false;
+      return word === reverseWord;
 };
 
 isPalindrome('ШалаШ'); // true
@@ -52,14 +60,10 @@ isPalindrome('привет'); // false
 // Регистр в словах учитываться не должен.
 
 function areAnagrams(word1, word2){
-    var word1 = word1.toLowerCase().split(''),
-        word2 =  word2.toLowerCase().split('');
+  var word1 = word1.toLowerCase().split(''),
+      word2 =  word2.toLowerCase().split('');
 
-    function getSorted(a,b) {
-        if ( a < b )  return -1;
-        if ( a > b )  return 1;
-    };
-    return (word1.sort(getSorted).join('') == word2.sort(getSorted).join(''))? true : false;
+  return (word1.sort().join('') == word2.sort().join(''));
 };
 
     areAnagrams('кот', 'Отк'); // true
@@ -89,11 +93,16 @@ divideArr([1, 2, 3, 4, 5, 6, 7, 8], 3); // [[1, 2, 3], [4, 5, 6], [7, 8]]
 
 function checkPowerOf2(number) {
   var n = 1;
-  while (n < 50) {
+  while (n <= 50) {
+    if (number === 1) {
+        return true;
+      };
     if (number === Math.pow(2,n)) {
-      console.log(number + ' является ' + n + ' степенью числа 2');
+      return (number + ' является ' + n + ' степенью числа 2');
+    } else if (number !== Math.pow(2,n) && n == 50) {
+        return (number + ' не является степенью числа 2');
     }
-    n++; 
+      n++; 
   };
 };
 
