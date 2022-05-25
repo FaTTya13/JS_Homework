@@ -2,16 +2,13 @@
 // Переписать задачу с использованием перебирающего метода массивов:
 
 function filterNumbersArr(numbers) {
-  var newArr = [];
-  numbers.filter(function(el) {
-      if (el > 0) {
-        newArr[newArr.length] = el;
-      };
+  var newArr = numbers.filter(function(num) {
+        return num > 0; 
   });
-  return newArr;
-}
-
-filterNumbersArr([-1, 0, 2, 34, -2, 5, -3, 0, 16]);
+      return newArr;
+  };
+  
+  filterNumbersArr([-1, 0, 2, 34, -2, 5, -3, 0, 16]);
 
 // Задание 2:
 // Написать функцию, принимающую массив чисел и возвращающую первое найденное положительное число.
