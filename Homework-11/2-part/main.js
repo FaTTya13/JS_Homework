@@ -21,12 +21,13 @@ function addInput(evt) {
         target.className != 'filled';
 
     if (evt.key === "Enter") {
-        evt.target.blur();
+        target.blur();
     }
 
     if (eliminate) {
         input.setAttribute('type', 'text');
         input.setAttribute('value', '');
+        input.style.borderWidth = '0px';
         target.classList.add('filled')
         target.appendChild(input);
         input.focus();
