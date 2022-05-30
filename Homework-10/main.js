@@ -23,10 +23,11 @@ function f(array) {
 };
 
 function f(arr) {
-    var time = arr.reduce(function(item, current) {
+    var str = 'Текущее время : ',
+        time = arr.reduce(function(item, current) {
         return item += ' : ' + current;
-    });
-    return 'Текущее время : ' + time;
+    }), str;
+    return str + time;
 };
 
 f(['00', '13', '24']);
