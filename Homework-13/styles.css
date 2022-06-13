@@ -1,0 +1,65 @@
+body {
+    background-color: #000;
+}
+.page-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+button {
+    width: 200px;
+    height: 50px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: large;
+    background-color: greenyellow;
+    cursor: pointer;
+}
+.main-block {
+    width: 900px;
+    border-radius: 15px;
+}
+.users-tabs {
+    display: flex;
+    justify-content: space-between;
+    background-color: inherit;
+}
+.info-block {
+    background-color: #fff;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.error {
+    height: 100px;
+    background-color: red;
+    text-align: center;
+    line-height: 100px;
+}
+.userpage {
+    background-color: greenyellow;
+    width: 100px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.userblock {
+    display: none; 
+    align-items: center;
+    padding: 25px;
+}
+.img {
+    width: 150px;
+    height: 150px;
+    margin-right: 10px;
+}
+.activeTab {
+    background-color: white;
+}
+.activeBlock {
+    display: flex;
+}
