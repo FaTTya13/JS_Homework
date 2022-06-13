@@ -1,5 +1,5 @@
 // Задание 1:
-// Добавить на страницу два поля для ввода - X и Y и кнопку "Create".
+// Добавить на страницу два поля для ввода - X и Y и кнопку 'Create'.
 // Если хотя бы одно из полей пустое - кнопка дизэйблится (делать по keyup).
 // Поля должны принимать только целые числа от 1 до 10, в противном случае должно выводиться сообщение об ошибке
 // (делать по click).
@@ -15,15 +15,15 @@ var inputs = document.getElementsByTagName('input'),
     myBtn = document.getElementsByTagName('button')[0];
     myBtn.disabled = true;
 
-firstInput.insertAdjacentHTML('beforeBegin', "X:");
-secondInput.insertAdjacentHTML('beforeBegin', "Y:");
+firstInput.insertAdjacentHTML('beforeBegin', 'X:');
+secondInput.insertAdjacentHTML('beforeBegin', 'Y:');
 
 firstInput.addEventListener('keyup', stateChangeBtn);
 secondInput.addEventListener('keyup', stateChangeBtn);
 myBtn.addEventListener('click', getNumbers);
 
 function stateChangeBtn() {
-    var check = firstInput.value !== "" && secondInput.value !== "";
+    var check = firstInput.value !== '' && secondInput.value !== '';
     if (check) {
         myBtn.disabled = false; 
     }
@@ -48,6 +48,7 @@ function getNumbers() {
         firstInput.value = '';
         secondInput.value = '';
     };
+    myBtn.disabled = true; 
 };
 
 function createChessTable() {
@@ -75,13 +76,9 @@ function createChessTable() {
            for (var j = 0; j < +firstInput.value; j++) {
                var td = document.createElement('td');
                if (isWhiteCell) {
-                td.style.width = '50px';
-                td.style.height = '50px';
-                td.style.backgroundColor = 'white';
+                   td.classList.add('white');
                } else {
-                td.style.width = '50px';
-                td.style.height = '50px';
-                td.style.backgroundColor = 'black';
+                    td.classList.add('black');
                }
                isWhiteCell = !isWhiteCell;
                tr.appendChild(td);      
@@ -103,11 +100,13 @@ function createChessTable() {
         if (target.tagName == 'TD') {
             var cells = container.getElementsByTagName('td');
             for (var i = 0; i < cells.length; i++) {
-               if (cells[i].style.backgroundColor === 'white') {
-                cells[i].style.backgroundColor = 'black';
-               } else {
-                cells[i].style.backgroundColor = 'white';
-               }
+                if (cells[i].classList.contains('white')) {
+                    cells[i].classList.remove('white');
+                    cells[i].classList.add('black');
+                } else {
+                    cells[i].classList.remove('black');
+                    cells[i].classList.add('white');
+                }
             };
         };
     };
