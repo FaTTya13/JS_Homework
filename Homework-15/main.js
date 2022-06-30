@@ -3,9 +3,9 @@
 // соответствующие значения, а все, что осталось - в объект obj.
 
 {
-let {a, b, ...obj} = {a: 1, b: 2, c: 3, d: 4};
+    let {a, b, ...obj} = {a: 1, b: 2, c: 3, d: 4};
 };
-
+    
 // Задание 2: 
 // Запросить у пользователя имя и сохранить его в переменную.
 // Создать объект со свойством name, куда записать короткой записью значение имени пользователя, и методом sayHi,
@@ -15,12 +15,14 @@ let {a, b, ...obj} = {a: 1, b: 2, c: 3, d: 4};
 // Проверить работу метода. Убедиться в уместном использовании способов задания переменной.
 
 {
-let name = prompt('Введите Ваше имя');
-const obj = {name};
-obj.sayHi = function() {
-    return `Hi, ${this.name}!`;
-};
-obj.sayHi();
+    let name = prompt('Введите Ваше имя');
+    const obj = {
+        name,
+        sayHi() {
+            return `Hi, ${this.name}!`;
+        }
+    };
+    obj.sayHi();
 };
 
 // Задание 3:
@@ -86,12 +88,10 @@ func(1,2,3,4,5,6,7,8,9);
 
 {
 function countVowelLetters(text) {
-    let chars = [...text.toLowerCase()];
-    let vowelLetters = ['а', 'я', 'ы', 'и', 'о', 'ё', 'у', 'ю', 'э', 'е', 'a', 'e', 'i', 'o', 'u', 'y'];
+    const chars = [...text.toLowerCase()];
+    const vowelLetters = ['а', 'я', 'ы', 'и', 'о', 'ё', 'у', 'ю', 'э', 'е', 'a', 'e', 'i', 'o', 'u', 'y'];
     counter = 0;
-    chars.forEach(function(item) {
-      vowelLetters.includes(item) && counter++
-    })
+    chars.forEach( item => {vowelLetters.includes(item) && counter++} );
     return counter;
 };
 console.log(countVowelLetters('Шла Саша по шоссе И сосала сУшку'));
@@ -115,18 +115,17 @@ console.log(countVowelLetters('Шла Саша по шоссе И сосала �
 // Для свойства "Пользователь с именем Федор" осуществлять поиск объекта по имени, которое начинается с подстроки Fedor.
 
 {
-    users = [
+   const users = [
     {name: 'Vasya Pupkin', age: 25},
     {name: 'Ivan Petrov', age: 30},
     {name: 'Fedor Ivanov', age: 42}
 ];
 
 function func(users) {
-    const obj = {
+    return {
         'Пользователи младше 40': users.filter(user => user.age < 40),
-        'Пользователь с именем Федор': users.find(user => user.name.includes('Fedor'))
+        'Пользователь с именем Федор': users.find(user => user.name.startsWith('Fedor'))
     };
-    return obj;
 };
 console.log(func(users));
 };
@@ -139,16 +138,10 @@ console.log(func(users));
 //   ]
 
 {
-function func(users) {
-  const newUsers = [];
-  let i = 0;
-  users.map(user => {
-    user = {['Пользователь ' + ++i]: user};
-    newUsers.push(user);
-  })
-  return newUsers;
-};    
-console.log(func(['Вася','Петя','Ваня']));
+    function func(users) {
+       return users.map((user, index) => ({[`Пользователь ${++index}`]: user}));
+    };    
+    console.log(func(['Вася','Петя','Ваня']));
 };
 
 
@@ -175,9 +168,7 @@ const users = [
 ];
 
 function func(users) {
-   return users.reduce( (acc, user)  => {
-        return Object.assign(acc, user);
-    }, {})
+   return users.reduce((acc, user) => Object.assign(acc, user), {})
 }
 console.log(func(users));
 };
@@ -192,7 +183,7 @@ class Animal {
         this._foodAmount = 50;
     }
     _formatFoodAmount () {
-        return this._foodAmount + ' гр.';
+        return `${this._foodAmount} гр.`;
     }
     dailyNorm (amount) {
         if (!arguments.length) return this._formatFoodAmount();
@@ -204,7 +195,7 @@ class Animal {
         this._foodAmount = amount;
     }
     feed () {
-        console.log('Насыпаем в миску ' + this.dailyNorm() + ' корма.');
+        console.log(`Насыпаем в миску ${this.dailyNorm()} корма.`);
     }
 };
 
@@ -241,14 +232,12 @@ function createPromise(x, y) {
         };
         if (Number.isInteger(x) && Number.isInteger(y)) {
             let timer = setInterval(() => {
-                for (let i = x; i <= y; i++) {
-                    console.log(i)
-                    if (i === y) {
+                    console.log(x)
+                    if (x === y) {
                         clearInterval(timer);
-                        resolve(i);
-                    };
-                };
-            }, 0);
+                        resolve(x);
+                    } else x++
+            }, 1000);
         } else reject('есть не целое число');
     });
 };
@@ -257,21 +246,3 @@ createPromise(5,1)
 .then(i => console.log(`Крайнее число: ${i}`))
 .catch(error => console.log(`Возникла ошибка в промисе: ${error}`))
 }
-
-// let users = [
-//     {name: 'Vasya', age: 25},
-//     {name: 'Piotr', age: 10}
-// ];
-
-// function func(users) {
-//     users.reduce((acc, user) => {
-//         if (user.age < 18) delete user
-//     }, []);
-// };
-
-// func(users);
-
-// // результат : 
-// // let users = [
-// //     {name: 'Vasya', age: 25, title: 'Vasya - 25'}
-// // ];
